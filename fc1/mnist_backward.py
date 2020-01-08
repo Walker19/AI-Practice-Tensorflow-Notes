@@ -9,12 +9,11 @@ LEARNING_RATE_DECAY = 0.99
 REGULARIZER = 0.0001
 STEPS = 50000
 MOVING_AVERAGE_DECAY = 0.99
-MODEL_SAVE_PATH="./model/"
-MODEL_NAME="mnist_model"
+MODEL_SAVE_PATH = "./model/"
+MODEL_NAME = "mnist_model"
 
 
 def backward(mnist):
-
     x = tf.placeholder(tf.float32, [None, mnist_forward.INPUT_NODE])
     y_ = tf.placeholder(tf.float32, [None, mnist_forward.OUTPUT_NODE])
     y = mnist_forward.forward(x, REGULARIZER)
@@ -27,7 +26,7 @@ def backward(mnist):
     learning_rate = tf.train.exponential_decay(
         LEARNING_RATE_BASE,
         global_step,
-        mnist.train.num_examples / BATCH_SIZE, 
+        mnist.train.num_examples / BATCH_SIZE,
         LEARNING_RATE_DECAY,
         staircase=True)
 
@@ -56,7 +55,6 @@ def main():
     mnist = input_data.read_data_sets("./data/", one_hot=True)
     backward(mnist)
 
+
 if __name__ == '__main__':
     main()
-
-
